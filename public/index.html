@@ -1,0 +1,118 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>The Color of Water: Algorithmic Sea</title>
+	<meta property="og:title" content="The Color of Water: Algorithmic Sea">
+	<meta property="og:site_name" content="The Color of Water: Algorithmic Sea">
+	<meta property="og:url" content="https://colorofwater.herokuapp.com/">
+	<meta property="og:description" content="The Color of Water: Algorithmic Sea explores the sociotechnical perception of color, especially how it is actualized through computer systems and their algorithms. The sea of colors shown in the installation is composed of a multitude of user generated colors. These colors undulate between the user and computer algorithmic processes.">
+	<meta property="og:type" content="website">
+	<meta name="viewport" content="width=600, shrink-to-fit=yes, user-scalable=no">
+	<link rel="apple-touch-icon" sizes="180x180" href="favico/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favico/favicon-16x16.png">
+	<link rel="manifest" href="favico/site.webmanifest">
+	<link rel="stylesheet" href="style.css" type="text/css" media="all"/>
+	<script src="js/stats.min.js"></script>
+	<script src="js/tween.js"></script>
+	<script src="js/socket.io.js"></script>
+	<script src="js/vivus.min.js"></script>
+	<script src="js/dat.gui.min.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/p5.min.js"></script>
+	<script src="js/p5.easycam.min.js"></script>
+	<script src="js/particle.js"></script>
+	<script src="js/mapping.js"></script>
+	<script src="js/sketch.js"></script>
+	<script src="js/sketch-metaball.js"></script>
+	<script type="text/javascript">
+		var p5Sketch, p5SketchMetaball;
+		document.addEventListener("DOMContentLoaded", function() {
+			p5SketchMetaball = new p5(sketchMetaball, document.getElementById("metaballContainer"))
+			p5Sketch = new p5(sketch, document.getElementById("sketchContainer"))
+
+			var aboutPage = document.getElementById("aboutPage");
+			var lastPage = "";
+			function pageChange() {
+				if(lastPage === "#send") {
+					p5Sketch.hide();
+				}else if(lastPage === "#about"){
+					aboutPage.classList.remove('visible');
+					setTimeout(function () {
+						aboutPage.style.display = "none";
+					}, 600);
+				}
+
+				var hash = window.location.hash;
+				addEvent('page_change', hash);
+				if(hash === "#send") {
+					p5Sketch.show();
+				}else if(hash === "#about"){
+					aboutPage.style.display = "block";
+					setTimeout(function () {
+						aboutPage.classList.add('visible');
+					}, 10);
+				}
+
+				lastPage = hash;
+			}
+			window.onhashchange = pageChange;
+			pageChange();
+		});
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-15TR4RWTES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-15TR4RWTES');
+		function addEvent(name, value){
+			gtag('event', name, value);
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<a href="#sea" class="logo"><img src="images/the-color-of-water.svg"/></a>
+		<nav>
+			<ul>
+				<li><a href="#send" id="send">Add your color to the sea</a></li>
+				<li><a href="#about" id="about">About</a></li>
+			</ul>
+		</nav>
+	</header>
+	<form style="display: none" method="POST" action="/upload-profile-pic" enctype="multipart/form-data" id="uploadForm">
+		<input type="file" name="profile_pic" id="profile_pic" />
+		<input type="hidden" name="colorchosen1" id="valueInput" value="5984c9">
+		<input type="submit" name="btn_upload_profile_pic" value="Upload" />
+	</form>
+	<div id="textContainer"></div>
+	<div id="sketchContainer"></div>
+	<div id="metaballContainer"></div>
+	<div id="aboutPage">
+		<a href="#sea" id="closeBtn">Close</a>
+		<div class="content">
+			<h1>The Color of Water: Algorithmic Sea</h1>
+
+<p>Transparent. Translucent. Opaque. Reflective. What is the color of Water?</p>
+
+<p>In this installation, water is a reflecting pool for both the human and computational understanding of color. Like water, these perceptions are always transforming.</p>
+
+<p>The web and physical installation <i>The Color of Water: Algorithmic Sea</i> explores the sociotechnical perception of color, especially how it is actualized through computer systems and their algorithms. The sea of colors shown in the installation is composed of a multitude of user generated colors. These colors undulate between the user and computer algorithmic processes.</p>
+
+<p>In 1814, Abraham Gottlob Werner created color charts with the ambition of making a color standard through naming corresponding minerals. <a href="https://sarahschorr.com/Artist.asp?ArtistID=5380&Akey=Y2PRXC5P&ajx=1#!Group1_Pf189853" target="_blank">The Color of Water (2019-2020)</a>, a photographic body of work by artist Sarah Schorr, expands Werner’s charts to include the feminist, embodied, and situational dimensions of color by amending the charts to include metallic reflective colors. <i>The Color of Water: Algorithmic Sea</i> extends this inquiry, marking a collaboration between Sarah Schorr, researcher Gabriel Pereira, and creative coder Vamoss.</p>
+
+<p>Through this installation and a digital essay, we do not provide a definite answer to the question of what is the color of water for a human or a computer. Instead, we seek to reflect the inherent qualities of "partial," "change", and “bias” through the critical collecting, analyzing, and displaying of a sea of colors. This installation invites you and the algorithm to see color as a flow, as opposed to a fixed variable.</p>
+
+<p>Add your color to the sea <a href="#send">here</a>.</p>
+
+<blockquote cite="https://sarahschorr.com/Artist.asp?ArtistID=5380&Akey=Y2PRXC5P"><a href="https://sarahschorr.com/Artist.asp?ArtistID=5380&Akey=Y2PRXC5P" target="_blank">Sarah Schorr</a> is an American photographic artist, researcher, and educator. A captivation with light, water, and modes of embodied contemplation runs through her work. Schorr’s work has been widely exhibited with solo shows at esteemed spaces such as Yancey Richardson Gallery and Scalo Project Space in New York, NY. Her photographic art has been selected for juried group exhibitions by notable curators such as Elizabeth Avedon and Paula Tognarelli. Most recently, Schorr's image ebbtide received the director's prize at the Griffin Museum of Photography in Winchester, MA which will result in an exhibition and catalogue. In 2020, Schorr’s work was honored by the Julia Margaret Cameron Award for women photographers in the category of nude (first prize) as part of an exhibition at the Fotonostrum Gallery in Barcelona, Spain. Schorr received her BA in English Literature from Wesleyan University, her MFA in Photography, Video, and Related Media from the School of Visual Arts and her PhD in media studies at Aarhus University with a dissertation entitled, “Social Photography: Photographic Practices in the Context of Social Media”. She was selected for a (forthcoming) Terra Foundation fellowship and residency in Giverny, France for 2021.</blockquote>
+
+<blockquote cite="https://www.gabrielpereira.net/"><a href="https://www.gabrielpereira.net/" target="_blank">Gabriel Pereira</a> is a researcher PhD fellow at Aarhus University (Denmark). Previously, he was a visiting graduate student in Comparative Media Studies at MIT. His research focuses on critical studies of data, computer vision algorithms, and digital infrastructures, using both social scientific and artistic methodologies. Projects with Gabriel have been exhibited in the 33rd Sao Paulo Art Biennial, the Van Abbemuseum, IDFA DocLab, Itaú Cultural, aarea.co, and academic journals/conferences. He is a Researcher in Residence at the Center for Arts, Design, and Social Research (CAD+SR).</blockquote>
+ 
+<blockquote cite="https://www.vamoss.com.br/"><a href="https://www.vamoss.com.br/" target="_blank">Vamoss</a> is a creative coder and Technology Director at SuperUber since 2011.  He integrates content, hardware, software, design and architecture to develop unique projects. Graduated in Design at ESPM-Rio, he works with interactive media since 2004, developing projects for new Media, Mobile and Web. He is now investigating the Creative Community in Brazil at the Master program in Creative Economics at ESPM-Rio, where by engaging the creative code community he intends to create a collaborative platform for sharing knowledge between the creative coders and society.</blockquote>
+		</div>
+	</div>
+</body>
+</html>
