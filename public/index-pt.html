@@ -1,0 +1,120 @@
+<html lang="pt">
+<head>
+	<meta charset="utf-8">
+	<title>A Cor da Água: Mar Algorítmico</title>
+	<meta property="og:title" content="A Cor da Água: Mar Algorítmico">
+	<meta property="og:site_name" content="A Cor da Água: Mar Algorítmico">
+	<meta property="og:url" content="https://www.algorithmicsea.com/">
+	<meta property="og:description" content="A Cor da Água: Mar Algorítmico explora a percepção sociotécnica da cor, especialmente como ela é atualizada por meio de sistemas computacionais e seus algoritmos. O mar de cores mostrado na instalação é composto por uma infinidade de cores geradas pelo usuário. Essas cores ondulam entre o usuário e os processos algorítmicos do computador.">
+	<meta property="og:type" content="website">
+	<meta name="viewport" content="width=600, shrink-to-fit=yes, user-scalable=no">
+	<link rel="apple-touch-icon" sizes="180x180" href="favico/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favico/favicon-16x16.png">
+	<link rel="manifest" href="favico/site.webmanifest">
+	<link rel="stylesheet" href="style.css" type="text/css" media="all"/>
+	<script src="js/languageDetector.js"></script>
+	<script src="js/stats.min.js"></script>
+	<script src="js/tween.js"></script>
+	<script src="js/socket.io.js"></script>
+	<script src="js/vivus.min.js"></script>
+	<script src="js/dat.gui.min.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/p5.min.js"></script>
+	<script src="js/p5.easycam.min.js"></script>
+	<script src="js/particle.js"></script>
+	<script src="js/mapping.js"></script>
+	<script src="js/sketch.js"></script>
+	<script src="js/sketch-metaball.js"></script>
+	<script type="text/javascript">
+		var p5Sketch, p5SketchMetaball;
+		document.addEventListener("DOMContentLoaded", function() {
+			p5SketchMetaball = new p5(sketchMetaball, document.getElementById("metaballContainer"))
+			p5Sketch = new p5(sketch, document.getElementById("sketchContainer"))
+
+			var aboutPage = document.getElementById("aboutPage");
+			var lastPage = "";
+			function pageChange() {
+				if(lastPage === "#enviar") {
+					p5Sketch.hide();
+				}else if(lastPage === "#sobre"){
+					aboutPage.classList.remove('visible');
+					setTimeout(function () {
+						aboutPage.style.display = "none";
+					}, 600);
+				}
+
+				var hash = window.location.hash;
+				addEvent('page_change', hash);
+				if(hash === "#enviar") {
+					p5Sketch.show();
+				}else if(hash === "#sobre"){
+					aboutPage.style.display = "block";
+					setTimeout(function () {
+						aboutPage.classList.add('visible');
+					}, 10);
+				}
+
+				lastPage = hash;
+			}
+			window.onhashchange = pageChange;
+			pageChange();
+		});
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-15TR4RWTES"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-15TR4RWTES');
+		function addEvent(name, value){
+			gtag('event', name, value);
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<a href="#mar" class="logo"><img src="images/pt/a-cor-da-agua.svg"/></a>
+		<nav>
+			<ul>
+				<li><a href="#enviar" id="send">Adicione sua cor ao mar</a></li>
+				<li><a href="#sobre" id="about">Sobre</a></li>
+				<li><a href="index.html" id="language">English</a></li>
+			</ul>
+		</nav>
+	</header>
+	<form style="display: none" method="POST" action="/upload-profile-pic" enctype="multipart/form-data" id="uploadForm">
+		<input type="file" name="profile_pic" id="profile_pic" accept=".jpg,.jpeg,.png" />
+		<input type="hidden" name="colorchosen1" id="valueInput" value="5984c9">
+		<input type="submit" name="btn_upload_profile_pic" value="Upload" />
+	</form>
+	<div id="textContainer"></div>
+	<div id="sketchContainer"></div>
+	<div id="metaballContainer"></div>
+	<div id="aboutPage">
+		<a href="#mar" id="closeBtn">Fechar</a>
+		<div class="content">
+			<h1>A Cor da Água: Mar Algorítmico</h1>
+
+<p>Transparente. Translúcida. Opaca. Reflexiva. Qual é a cor da água?</p>
+
+<p>Nesta instalação, a água é um espelho para a compreensão humana e computacional sobre a cor. Assim como a água, essas percepções estão sempre se transformando.</p>
+
+<p>A instalação e net art The Color of Water: Algorithmic Sea explora a percepção sociotécnica da cor, especialmente como ela é atualizada por meio de sistemas computacionais e seus algoritmos. O mar de cores mostrado na instalação é composto por uma infinidade de cores geradas pelo usuário e inteligência artificial. Essas cores ondulam entre o usuário e os processos algorítmicos do computador. Esta instalação convida você e o algoritmo a ver cores como um fluxo, em oposição a um nome ou valor fixo.</p>
+
+<p>Em 1814, Abraham Gottlob Werner criou gráficos de cores com a ambição de estabelecer um padrão de cor por meio da nomeação de minerais correspondentes. "The Color of Water" (2019-2020), uma obra fotográfica da artista Sarah Schorr, amplia os gráficos de Werner para incluir dimensões feministas, encarnadas e situacionais da cor, adicionando cores metálicas aos seus sistemas. "A Cor da Água: Mar Algorítmico" estende essa investigação, marcando uma colaboração entre Sarah Schorr, o pesquisador Gabriel Pereira e o programador criativo Vamoss.</p>
+
+<p>Por meio desta instalação e de um ensaio digital, não oferecemos uma resposta definitiva para a pergunta sobre qual é a cor da água para um ser humano ou um computador. Em vez disso, buscamos refletir as qualidades inerentes de "parcialidade", "mudança" e "viés" por meio da coleta crítica, análise e exibição de um mar de cores. Esta instalação convida você e o algoritmo a ver a cor como um fluxo, em oposição a uma variável fixa.</p>
+
+<p>Adicione sua cor ao mar <a href="#enviar">aqui</a>.</p>
+
+<blockquote cite="https://sarahschorr.com/Artist.asp?ArtistID=5380&Akey=Y2PRXC5P"><a href="https://sarahschorr.com/Artist.asp?ArtistID=5380&Akey=Y2PRXC5P" target="_blank">Sarah Schorr</a> é uma artista fotográfica norte-americana, pesquisadora e educadora. A fascinação pela luz, água e modos de contemplação encarnada percorre o seu trabalho. O trabalho de Schorr foi amplamente exibido, com exposições individuais em espaços conceituados como a Yancey Richardson Gallery e o Scalo Project Space em Nova York, NY. Sua arte fotográfica foi selecionada para exposições em grupo com curadores notáveis como Elizabeth Avedon e Paula Tognarelli. Mais recentemente, a imagem de Schorr "ebbtide" recebeu o prêmio do diretor no Griffin Museum of Photography em Winchester, MA, o que resultará em uma exposição e catálogo. Em 2020, o trabalho de Schorr foi premiado com o Julia Margaret Cameron Award para mulheres fotógrafas na categoria de nu (primeiro prêmio) como parte de uma exposição na Fotonostrum Gallery em Barcelona, Espanha. Schorr obteve seu diploma de bacharel em Literatura Inglesa na Wesleyan University, seu Mestrado em Belas Artes em Fotografia, Vídeo e Mídias Relacionadas na Escola de Artes Visuais e seu doutorado em estudos de mídia na Aarhus University com uma dissertação intitulada "Fotografia Social: Práticas Fotográficas no Contexto das Mídias Sociais". Ela foi selecionada para uma bolsa e residência (em breve) da Terra Foundation em Giverny, França, para 2021.</blockquote>
+
+<blockquote cite="https://www.gabrielpereira.net/"><a href="https://www.gabrielpereira.net/" target="_blank">Gabriel Pereira</a> é pesquisador e doutorando na Universidade de Aarhus (Dinamarca). Anteriormente, foi estudante de pós-graduação visitante no Comparative Media Studies no MIT. Sua pesquisa se concentra em estudos críticos de dados, algoritmos de visão computacional e infraestruturas digitais, usando metodologias sociais e artísticas. Seus projetos foram exibidos na 33ª Bienal de Arte de São Paulo, no Van Abbemuseum, no IDFA DocLab, no Itaú Cultural, aarea.co e em revistas/conferências acadêmicas. Ele é pesquisador Residente no Center for Arts, Design and Social Research (CAD+SR).</blockquote>
+ 
+<blockquote cite="https://www.vamoss.com.br/"><a href="https://www.vamoss.com.br/" target="_blank">Vamoss</a> é artista-programador, utiliza o código como matéria prima para criar projetos de arte gerativa. É Diretor de Tecnologia na SuperUber, onde contribuiu para projetos de museus em todo mundo desde 2011. Carlos é doutorando em Artes Visuais no PPGAV-UFRJ, na linha de Poéticas Interdisciplinares. Formado em Design e mestre em Economia Criativa pela ESPM-Rio, onde engajou com a comunidade de artistas-programadores brasileiros para criar o Encontros Digitais, um espaço de aprendizado em arte e novas tecnologias.</blockquote>
+		</div>
+	</div>
+</body>
+</html>

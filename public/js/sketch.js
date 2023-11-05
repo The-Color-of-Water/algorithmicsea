@@ -124,10 +124,19 @@ const sketch = p5js => {
 				break;
 			}
 			case MODES.COLOR_CV: {
-				if(selectedColors.length == 2)
-					setText('images/first-color-most-recognized-by-the-computer.svg');
-				else
-					setText('images/second-color-most-recognized-by-the-computer.svg');
+				if(selectedColors.length == 2){
+					if(lang == "en") {
+						setText('images/en/first-color-most-recognized-by-the-computer.svg');
+					}else{
+						setText('images/pt/primeira-cor-mais-reconhecida-pelo-computador.svg');
+					}
+				}else{
+					if(lang == "en") {
+						setText('images/en/second-color-most-recognized-by-the-computer.svg');
+					}else{
+						setText('images/pt/segunda-cor-mais-reconhecida-pelo-computador.svg');
+					}
+				}
 				selected = new Particle(
 										p5js.color(openCvColors.shift()),
 										-config.gridSize, -config.gridSize, 100
@@ -143,7 +152,7 @@ const sketch = p5js => {
 
 	function setText(file){
 		removeText();
-		svgText = new Vivus('textContainer', { file: file, duration: 2000 });
+		svgText = new Vivus('textContainer', { file: file, duration: lang == "en" ? 2000 : 100 });
 	}
 	function removeText(){
 		document.getElementById("textContainer").innerHTML = "";
@@ -322,8 +331,13 @@ const sketch = p5js => {
 	}
 
 	function initForm() {
-		setText('images/submit-your-water-photograph.svg');
-		setButton('click to choose', p5js.height/2);
+		if(lang == "en") {
+			setText('images/en/submit-your-water-photograph.svg');
+			setButton('click to choose', p5js.height/2);
+		}else{
+			setText('images/pt/envie-sua-fotografia-da-agua.svg');
+			setButton('clique para escolher', p5js.height/2);
+		}
 
 		document.getElementById('send').style.display = "none";
 		config.moviment = false;
@@ -353,7 +367,11 @@ const sketch = p5js => {
 	//----------------------
 	//COLOR PICKER
 	function initColorPicker() {
-		setText('images/select-the-dominant-color.svg');
+		if(lang == "en") {
+			setText('images/en/select-the-dominant-color.svg');
+		}else{
+			setText('images/pt/selecione-a-cor-dominante.svg');
+		}
 	    removeButton();
 
 		colorPickerGrid = [];
@@ -407,7 +425,11 @@ const sketch = p5js => {
 			return;
 		}
 
-		setText('images/pull-out-the-most-memorable-color.svg');
+		if(lang == "en") {
+			setText('images/en/pull-out-the-most-memorable-color.svg');
+		}else{
+			setText('images/pt/destaque-a-cor-mais-memoravel.svg');
+		}
 		p5js.loadImage(imageUrl, img => {
 			image = img;
 
@@ -695,16 +717,24 @@ const sketch = p5js => {
 	}
 
 	function initConfirmScreen(){
-		setText('images/the-colours-of-your-image-have-been-chosen.svg');
+		if(lang == "en") {
+			setText('images/en/the-colours-of-your-image-have-been-chosen.svg');
+		}else{
+			setText('images/pt/as-cores-da-sua-imagem-foram-escolhidas.svg');
+		}
 		p5SketchMetaball.goToCenter();
 		setTimeout(function(){
-			setButton('Send off your color to the sea', p5js.height/2, onConfirm);
+			if(lang == "en") {
+				setButton('Send off your color to the sea', p5js.height/2, onConfirm);
+			}else{
+				setButton('Envie sua cor de volta para o mar', p5js.height/2, onConfirm);
+			}
 		}, 2000);
 	}
 
 	function onConfirm(){
 		addEvent('6_send_off_the_color_to_the_sea', {uuid, selectedColors});
-		window.location.hash = '#sea';
+		window.location.hash = lang == "en" ? "#sea" : "#mar";
 		// console.log("confirming", uuid, selectedColors)
 		p5js.httpPost("/send", 'json', { uuid: uuid, selectedColors: selectedColors }, function(result) {
 			// console.log("onConfirm", result);
